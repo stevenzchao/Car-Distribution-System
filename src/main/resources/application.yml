@@ -1,0 +1,50 @@
+spring:
+  cache:
+    type: redis
+    cache-names:
+      - cache1
+      - cache2
+    redis:
+      time-to-live: 5000
+      cache-null-values: true
+  data:
+    redis:
+      # 这里只配置主节点的连接信息即可，
+      # 因为 RedisTemplate 可以从主节点中获取从节点的信息
+      host: 172.30.192.1
+      port: 6379
+      password: root
+      jedis:
+        pool:
+          # 最大连接数
+          max-active: 10
+          # 最大空闲连接数
+          max-idle: 5
+          # 最小空闲
+          min-idle: 1
+          # 连接超时时间（毫秒）
+          max-wait: 3000
+  #SQL specific properties
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3307/carDistributeSys?useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+  #ORM s/w specific properties
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+
+#changing the server port
+server:
+  port=8080
+
+
+
